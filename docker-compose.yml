@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  db-mongo:
+    container_name: hex-mongo-dck
+    image: mongo:4.4-bionic
+    environment:
+      MONGO_INITDB_DATABASE: hex-db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: passw0rd
+    ports:
+      - 27017:27017
