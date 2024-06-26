@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/HexArq/internal/domain"
-	"github.com/HexArq/internal/services/player"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,14 +15,14 @@ import (
 	- Translate the response
 */
 
-func CreatePlayer(ginCtx *gin.Context) {
+func (h Handler) Create(ginCtx *gin.Context) {
 	var dPlayer domain.Player
 	if errBindJSON := ginCtx.BindJSON(&dPlayer); errBindJSON != nil {
 		ginCtx.JSON(http.StatusBadRequest, gin.H{"error": errBindJSON.Error()})
 		return
 	}
 
-	insertedID, errCreatePLayer := player.CreatePLayerService(dPlayer)
+	insertedID, errCreatePLayer := h.PlayerService.Create(dPlayer)
 	if errCreatePLayer != nil {
 		ginCtx.JSON(http.StatusInternalServerError, gin.H{"error": "oops!"})
 	}
