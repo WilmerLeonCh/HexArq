@@ -25,7 +25,18 @@ func (h Handler) Create(ginCtx *gin.Context) {
 	insertedID, errCreatePLayer := h.PlayerService.Create(dPlayer)
 	if errCreatePLayer != nil {
 		ginCtx.JSON(http.StatusInternalServerError, gin.H{"error": "oops!"})
+		return
 	}
 
 	ginCtx.JSON(http.StatusOK, gin.H{"player_id": insertedID})
+}
+
+func (h Handler) Retrieve(ginCtx *gin.Context) {
+	players, errRetrieve := h.PlayerService.Retrieve()
+	if errRetrieve != nil {
+		ginCtx.JSON(http.StatusInternalServerError, gin.H{"error": "oops!"})
+		return
+	}
+
+	ginCtx.JSON(http.StatusOK, gin.H{"players": players})
 }

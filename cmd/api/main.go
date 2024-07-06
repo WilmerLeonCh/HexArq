@@ -39,6 +39,7 @@ func main() {
 	}
 
 	ginEngine.POST("/players", playerHand.Create)
+	ginEngine.GET("/players", playerHand.Retrieve)
 
 	log.Fatalln(ginEngine.Run(":8081"))
 }
