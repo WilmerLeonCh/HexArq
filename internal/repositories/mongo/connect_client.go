@@ -18,7 +18,7 @@ func ConnectClient(uriDb string) (client *mongo.Client, err error) {
 	}
 
 	if errPing := client.Ping(ctx, nil); errPing != nil {
-		return nil, err
+		return nil, errPing
 	}
 	return client, nil
 }
